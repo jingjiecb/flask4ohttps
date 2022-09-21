@@ -47,7 +47,7 @@ def hook():
         else:
             logging.warning(f'{domains} request sign is invalid, ignoring...')
             continue
-
+    os.system("nginx -s reload")
     return ok_json
 
 
