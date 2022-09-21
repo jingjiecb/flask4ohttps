@@ -1,0 +1,11 @@
+[Unit]
+Description=flask for ohttps ssl certificate update
+
+[Service]
+WorkingDirectory=/root/py/flask4ohttps
+ExecStart=python3 app.py
+StandardOutput=null
+Restart=always
+
+[Install]
+WantedBy=default.target
