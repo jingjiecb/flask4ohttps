@@ -34,19 +34,20 @@ def hook():
     timestamp = json_data["timestamp"]
     sign = json_data["sign"]
 
-    try:
-        domain_config = config[domains]
-    except:
-        logging.warning(f'{domains} is not configured, ignoring...')
-        return ok_json
+    for domain in domains:
+        try:
+            domain_config = config[domain]
+        except:
+            logging.warning(f'{domain} is not configured, ignoring...')
+            continue
+        token = domain_config["token"]
+        sign_expected = md5(f'{timestamp}:{token}'.encode("utf-8")).hexdigest()
+        if sign == sign_expected:
+            deploy_certificate(cert_key, cert, domain_config["path"])
+        else:
+            logging.warning(f'{domains} request sign is invalid, ignoring...')
+            continue
 
-    token = domain_config["token"]
-    sign_expected = md5(f'{timestamp}:{token}'.encode("utf-8")).hexdigest()
-    if sign == sign_expected:
-        deploy_certificate(cert_key, cert, domain_config["path"])
-    else:
-        logging.warning(f'{domains} request sign is invalid, ignoring...')
-        abort(500)
     return ok_json
 
 
