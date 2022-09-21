@@ -1,0 +1,9 @@
+{
+  "domains": [
+    {
+      "domain": "xxx.yyy.zzz",
+      "path": "/path/to/dir",
+      "token": "your-secret-token"
+    }
+  ]
+}
