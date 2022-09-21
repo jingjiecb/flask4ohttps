@@ -13,7 +13,7 @@ ok_json = {
 config = {}
 with open("config.json", "r", encoding='utf-8') as config_file:
     config_raw = json.loads(config_file.read())
-    for domain in config["domains"]:
+    for domain in config_raw["domains"]:
         config[domain["domain"]] = domain
 
 
